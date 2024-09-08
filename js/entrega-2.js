@@ -10,7 +10,7 @@ const pesoDelPVCJumbo = 3.6; // es el mismo perfil todo la hoja x mt lineal
 const pesoDelPVCPrime = 2.8; // es el mismo perfil todo la hoja x mt lineal
 const pesoDelVidrioConstante = 2.5;
 
-//!---FUNCION DE CHEQUEO//
+//!---FUNCION DE CHEQUEO
 function Chequeo(ingreso, maximo, error) {
     let nombre
     for (nombre = parseFloat(prompt(ingreso)); isNaN(nombre) || nombre > maximo; nombre = parseFloat(prompt(ingreso))) {
@@ -51,60 +51,60 @@ function datos() {
             3. Jumbo 
             4. Prime`));
         }
-        ventanas.push({ anchoVentana: anchoVentana , altoVentana: altoVentana , cantidadHojas: cantidadHojas , espesorVidrio: espesorVidrio , linea: linea});
+        ventanas.push({ anchoVentana: anchoVentana, altoVentana: altoVentana, cantidadHojas: cantidadHojas, espesorVidrio: espesorVidrio, linea: linea });
 
         let respuesta = prompt("¿Querés calcular otra ventana? Si/No").toLowerCase();
-            if (respuesta === "si") {
-                continuar = true;
-            } else if( respuesta === "no") {
-                alert("Abri la consola para ver los resultados");
-                continuar = false;
-            }  
+        if (respuesta === "si") {
+            continuar = true;
+        } else if (respuesta === "no") {
+            alert("Abri la consola para ver los resultados");
+            continuar = false;
+        }
     }
 
     return ventanas
 
 }
-    class Ruedas {
-        constructor(modelo, codigo, peso) {
-            this.nombre = modelo;
-            this.codigo = codigo;
-            this.peso = peso;
-        }
-        seleccionada() {
-            console.log("Debes colocar " + this.nombre + " , su codigo es " + this.codigo + " y soporta " + this.peso + "kg");
-        }
+//! --------------- RUEDAS
+class Ruedas {
+    constructor(modelo, codigo, peso) {
+        this.nombre = modelo;
+        this.codigo = codigo;
+        this.peso = peso;
     }
-    
-    //Modena
-    let ruedaSimpleModena = new Ruedas("Rueda simple Modena", "ROL119", 60);
-    let ruedaDobleModena = new Ruedas("Rueda doble Modena", "ROL120", 120);
-    let ruedasModena= [ruedaSimpleModena, ruedaDobleModena];
-    // A30
-    let ruedaSimpleA30 = new Ruedas("Rueda simple A30", "ROL126", 110);
-    let ruedaDobleA30 = new Ruedas("Rueda doble A30", "ROL127", 220);
-    let ruedasA30= [ruedaSimpleA30, ruedaDobleA30];
-    // Prime
-    let ruedaCarroPrime = new Ruedas("Rueda doble carro plastica", "L-25004-21-0-1", 70);
-    let ruedaSimplePrime = new Ruedas("Rueda simple Ducasse para Balconera", "L-23230-70-0-8", 140);
-    let ruedaDoblePrime = new Ruedas("Rueda doble Ducasse para Balconera", "L-23300-00-0-8", 280);
-    let ruedasPrime= [ruedaCarroPrime,ruedaSimplePrime, ruedaDoblePrime];
-    // Jumbo
-    let ruedaSimpleJumbo = new Ruedas("Rueda simple Jumbo", "L-25006-59-0-6", 140);
-    let ruedaDobleJumbo = new Ruedas("Rueda doble A30", "L-25008-59-0-6", 280);
-    let ruedasJumbo= [ruedaSimpleJumbo, ruedaDobleJumbo ];
+    seleccionada() {
+        console.log("Debes colocar " + this.nombre + " , su codigo es " + this.codigo + " y soporta " + this.peso + "kg");
+    }
+}
+//!Modena
+let ruedaSimpleModena = new Ruedas("Rueda simple Modena", "ROL119", 60);
+let ruedaDobleModena = new Ruedas("Rueda doble Modena", "ROL120", 120);
+
+//! A30
+let ruedaSimpleA30 = new Ruedas("Rueda simple A30", "ROL126", 110);
+let ruedaDobleA30 = new Ruedas("Rueda doble A30", "ROL127", 220);
+
+//! Prime
+let ruedaCarroPrime = new Ruedas("Rueda doble carro plastica", "L-25004-21-0-1", 70);
+let ruedaSimplePrime = new Ruedas("Rueda simple Ducasse para Balconera", "L-23230-70-0-8", 140);
+let ruedaDoblePrime = new Ruedas("Rueda doble Ducasse para Balconera", "L-23300-00-0-8", 280);
+
+//! Jumbo
+let ruedaSimpleJumbo = new Ruedas("Rueda simple Jumbo", "L-25006-59-0-6", 140);
+let ruedaDobleJumbo = new Ruedas("Rueda doble A30", "L-25008-59-0-6", 280);
 
 
 
+//! ASIGNACION DE RUEDAS POR LINEA
 
-function asignaciondeRuedasModena(lineanum,  ventanas, linea){
-    let lineaSeleccionada = ventanas.filter((ventana) => ventana.linea === lineanum);
-    console.log(` Ventanas de la linea  ${linea} `)
-    lineaSeleccionada.forEach(objeto => {
+function asignaciondeRuedasModena(ventanas) {
+    let Modena = ventanas.filter((ventana) => ventana.linea === 1);
+    console.log(`%c----------- Ventanas de la linea Modena -----------`, "color: orange")
+    Modena.forEach(objeto => {
         let anchoHoja = objeto.anchoVentana / objeto.cantidadHojas;
         let pesoDelVidrioEnHoja = anchoHoja * objeto.altoVentana * pesoDelVidrioConstante * objeto.espesorVidrio;
         let pesoModena = (anchoHoja * pesoDelAluminioModenaAncho) + (objeto.altoVentana * pesoDelAluminioModenaAlto) + pesoDelVidrioEnHoja;
-        console.log(` La ventana de la linea ${linea} con un ancho de ${objeto.anchoVentana} mts, un alto de ${objeto.altoVentana} mts separada en ${objeto.cantidadHojas} hojas. Llevaria las siguientes ruedas: ` );
+        console.log(` La ventana de la linea Modena con un ancho de ${objeto.anchoVentana} mts, un alto de ${objeto.altoVentana} mts separada en ${objeto.cantidadHojas} hojas con un espesor de vidrio de ${objeto.espesorVidrio}  mm. Su peso por hoja es de ${pesoModena.toFixed(2)} kg. Llevaria las siguientes ruedas: `);
         if (pesoModena < ruedaSimpleModena.peso) {
             ruedaSimpleModena.seleccionada();
         } else if (pesoModena < ruedaDobleModena.peso) {
@@ -113,21 +113,78 @@ function asignaciondeRuedasModena(lineanum,  ventanas, linea){
             console.log("La ventana es muy grande para esta linea. El peso de la hoja es : " + Math.round(pesoModena) + "kg");
         }
     });
-    
+
 }
-let ventanas= datos();
-asignaciondeRuedasModena(1,  ventanas, "Modena");
+function asignaciondeRuedasA30(ventanas) {
+    let A30 = ventanas.filter((ventana) => ventana.linea === 2);
+    console.log(`%c----------- Ventanas de la linea A30 -----------`, "color: orange")
+    A30.forEach(objeto => {
+        let anchoHoja = objeto.anchoVentana / objeto.cantidadHojas;
+        let pesoDelVidrioEnHoja = anchoHoja * objeto.altoVentana * pesoDelVidrioConstante * objeto.espesorVidrio;
+        let pesoA30 = (anchoHoja * pesoDelAluminioA30Ancho) + (objeto.altoVentana * pesoDelAluminioA30Alto) + pesoDelVidrioEnHoja;
+        console.log(` La ventana de la linea A30 con un ancho de ${objeto.anchoVentana} mts, un alto de ${objeto.altoVentana} mts separada en ${objeto.cantidadHojas} hojas con un espesor de vidrio de ${objeto.espesorVidrio}  mm. Su peso por hoja es de ${pesoA30.toFixed(2)} kg. Llevaria las siguientes ruedas: `);
+        if (pesoA30 < ruedaSimpleA30.peso) {
+            ruedaSimpleA30.seleccionada();
+        } else if (pesoA30 < ruedaDobleA30.peso) {
+            ruedaDobleA30.seleccionada();
+        } else {
+            console.log("La ventana es muy grande para esta linea. El peso de la hoja es :" + Math.round(pesoA30) + "kg");
+        }
+    });
 
+}
+function asignaciondeRuedasPrime(ventanas) {
+    let Prime = ventanas.filter((ventana) => ventana.linea === 4);
+    console.log(`%c----------- Ventanas de la linea Prime -----------`, "color: orange")
+    Prime.forEach(objeto => {
+        let anchoHoja = objeto.anchoVentana / objeto.cantidadHojas;
+        let pesoDelVidrioEnHoja = anchoHoja * objeto.altoVentana * pesoDelVidrioConstante * objeto.espesorVidrio;
+        let perimetro = anchoHoja + anchoHoja + objeto.altoVentana + objeto.altoVentana;
+        let pesoPrime = (perimetro * pesoDelPVCPrime) + pesoDelVidrioEnHoja;
+        console.log(` La ventana de la linea Prime con un ancho de ${objeto.anchoVentana} mts, un alto de ${objeto.altoVentana} mts separada en ${objeto.cantidadHojas} hojas con un espesor de vidrio de ${objeto.espesorVidrio}  mm. Su peso por hoja es de ${pesoPrime.toFixed(2)} kg. Llevaria las siguientes ruedas: `);
+        if (pesoPrime < ruedaCarroPrime.peso) {
+            ruedaCarroPrime.seleccionada();
+        } else if (pesoPrime < ruedaSimplePrime.peso) {
+            ruedaSimplePrime.seleccionada();
+        } else if (pesoPrime < ruedaDoblePrime.peso) {
+            ruedaDoblePrime.seleccionada();
+        } else {
+            console.log("La ventana es muy grande para esta linea. El peso de la hoja es :" + Math.round(pesoPrime) + "kg");
+        }
+    });
 
-/*  let a30= ventanas.filter((ventana) => ventana.linea === 2);
-    let jumbo= ventanas.filter((ventana) => ventana.linea === 3);
-    let prime= ventanas.filter((ventana) => ventana.linea === 4);
-    let anchoHoja = anchoVentana / cantidadHojas;
-    let pesoDelVidrioEnHoja = anchoHoja * altoVentana * pesoDelVidrioConstante * espesorVidrio;
-let pesoModena = (anchoHoja * pesoDelAluminioModenaAncho) + (altoVentana * pesoDelAluminioModenaAlto) + pesoDelVidrioEnHoja;
-let pesoA30 = (anchoHoja * pesoDelAluminioA30Ancho) + (altoVentana * pesoDelAluminioA30Alto) + pesoDelVidrioEnHoja;
-let perimetro = anchoHoja + anchoHoja + altoVentana + altoVentana;
-let pesoPrime = (perimetro * pesoDelPVCPrime) + pesoDelVidrioEnHoja;
-let pesoJumbo = (perimetro * pesoDelPVCJumbo) + pesoDelVidrioEnHoja; */
+}
+function asignaciondeRuedasJumbo(ventanas) {
+    let Jumbo = ventanas.filter((ventana) => ventana.linea === 3);
+    console.log(`%c----------- Ventanas de la linea Jumbo -----------`, "color: orange")
+    Jumbo.forEach(objeto => {
+        let anchoHoja = objeto.anchoVentana / objeto.cantidadHojas;
+        let pesoDelVidrioEnHoja = anchoHoja * objeto.altoVentana * pesoDelVidrioConstante * objeto.espesorVidrio;
+        let perimetro = anchoHoja + anchoHoja + objeto.altoVentana + objeto.altoVentana;
+        let pesoJumbo = (perimetro * pesoDelPVCJumbo) + pesoDelVidrioEnHoja; 
+        console.log(` La ventana de la linea Jumbo con un ancho de ${objeto.anchoVentana} mts, un alto de ${objeto.altoVentana} mts separada en ${objeto.cantidadHojas} hojas con un espesor de vidrio de ${objeto.espesorVidrio} mm. Su peso por hoja es de ${pesoJumbo.toFixed(2)} kg. Llevaria las siguientes ruedas: `);
+        if (pesoJumbo < ruedaSimpleJumbo.peso) {
+            ruedaSimpleJumbo.seleccionada();
+        } else if (pesoJumbo < ruedaDobleJumbo.peso) {
+            ruedaDobleJumbo.seleccionada();
+        } else {
+            console.log("La ventana es muy grande para esta linea. El peso de la hoja es :" + Math.round(pesoJumbo) + "kg");
+        }
+    });
+
+}
+
+function calcular(){
+    let ventanas = datos();
+    const hoy = new Date();
+    console.log(`%cHoy ${hoy.toLocaleDateString("es-Ar")} calculaste las ruedas de las siguientes ventanas:`, "color: purple")
+    asignaciondeRuedasModena(ventanas);
+    asignaciondeRuedasA30(ventanas);
+    asignaciondeRuedasPrime(ventanas);
+    asignaciondeRuedasJumbo(ventanas);
+}
+
+calcular();
+
 
 
